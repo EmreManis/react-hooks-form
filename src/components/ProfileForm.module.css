@@ -3,4 +3,59 @@
     top: 10%;
     left: 50%;
     transform: translateX(-50%);
+    width: 40%;
+    font-weight: 600;
+    padding: 1em;
+}
+
+.divStyle {
+    display: flex;
+    margin: 1em;
+}
+
+.divStyle input {
+    height: 1.5rem;
+}
+.divStyle label {
+    display: flex;
+    align-items: center;
+}
+
+.fillWidth {
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    flex-basis: 70%;
+    margin-left: auto;
+}
+
+.divStyle2 {
+    display: flex;
+    margin-left: 1em;
+}
+
+.divStyle2 > *:not(:nth-child(1)) {
+    margin-left: 1em;
+}
+
+
+.divStyle2 >  *:nth-child(2) {
+    margin-left: 11.8em;
+}
+
+.inputCss {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+input[type=submit] {
+    background-color: #4c89fc;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1em;
+    padding: 10px 20px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+    color: white;
 }

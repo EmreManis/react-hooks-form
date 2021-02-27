@@ -7,6 +7,7 @@ const ProfileForm = () => {
     const [enteredForm, setEnteredForm] = useState({
         registerForm: {
             fname: {
+                divClass: classes.divStyle,
                 label: 'First Name',
                 elementConfig: {
                     className: classes.fillWidth,
@@ -19,6 +20,7 @@ const ProfileForm = () => {
                 }
             },
             lname: {
+                divClass: classes.divStyle,
                 label: 'Last Name',
                 elementConfig: {
                     className: classes.fillWidth,
@@ -31,6 +33,7 @@ const ProfileForm = () => {
                 }
             },
             email: {
+                divClass: classes.divStyle,
                 label: 'Email',
                 elementConfig: {
                     className: classes.fillWidth,
@@ -42,33 +45,35 @@ const ProfileForm = () => {
                     required: true
                 }
             },
-            gender: {
-                male: {
-                    label: 'Male',
-                elementConfig: {
-                    className: classes.fillWidth,
-                    type: 'radio',
-                    name: 'gender'
-                },
-                value: '',
-                validation: {
-                    required: true
-                    }
-                },
-                female: {
-                        label: 'Female',
-                    elementConfig: {
-                        className: classes.fillWidth,
-                        type: 'radio',
-                        name: 'gender'
-                    },
-                    value: '',
-                    validation: {
-                        required: true
-                    }               
-                }
-            },
+            // gender: {
+            //     divClass: 'classes.divStyle2',
+            //     male: {
+            //         label: 'Male',
+            //     elementConfig: {
+            //         className: "classes.fillWidth",
+            //         type: 'radio',
+            //         name: 'gender'
+            //     },
+            //     value: '',
+            //     validation: {
+            //         required: true
+            //         }
+            //     },
+            //     female: {
+            //             label: 'Female',
+            //         elementConfig: {
+            //             className: "classes.fillWidth",
+            //             type: 'radio',
+            //             name: 'gender'
+            //         },
+            //         value: '',
+            //         validation: {
+            //             required: true
+            //         }               
+            //     }
+            // },
             notes: {
+                divClass: classes.divStyle,
                 label: 'Notes',
                 elementConfig: {
                     className: classes.fillWidth,
@@ -83,10 +88,33 @@ const ProfileForm = () => {
         }
     });
 
+    const formElementsArray = [];
+    for (let key in enteredForm.registerForm) {
+        formElementsArray.push({
+            ...enteredForm.registerForm[key],
+                elementConfig: { ...enteredForm.registerForm[key].elementConfig }
+        });
+    }
+  
+    console.log(formElementsArray);
+  
     return (
         <section> {/*form section */}
             <form className={classes.formCss}>
-                <div className={classes.divStyle}>
+                {
+                     formElementsArray.map(formElement => (
+                        <div className={formElement.divClass}>
+                            <label>{formElement.label}</label>
+                            <input
+                                className={formElement.elementConfig.className}
+                                type={formElement.elementConfig.type}
+                                placeholder={formElement.elementConfig.placeholder}
+                                // required={formElement.config.validation.required}
+                            />
+                        </div>
+                    ))
+                }
+                {/* <div className={classes.divStyle}>
                     <label>First Name</label>
                     <input 
                         className={classes.fillWidth} 
@@ -135,10 +163,10 @@ const ProfileForm = () => {
                         placeholder="Write a note"
                     >
                     </textarea>
-                </div>
+                </div> */}
                 <div className={classes.inputCss}>
                     <input type="submit" value="Submit"/>
-                </div>
+                </div> 
             </form>
         </section>
     );

@@ -45,33 +45,33 @@ const ProfileForm = () => {
                     required: true
                 }
             },
-            // gender: {
-            //     divClass: 'classes.divStyle2',
-            //     male: {
-            //         label: 'Male',
-            //     elementConfig: {
-            //         className: "classes.fillWidth",
-            //         type: 'radio',
-            //         name: 'gender'
-            //     },
-            //     value: '',
-            //     validation: {
-            //         required: true
-            //         }
-            //     },
-            //     female: {
-            //             label: 'Female',
-            //         elementConfig: {
-            //             className: "classes.fillWidth",
-            //             type: 'radio',
-            //             name: 'gender'
-            //         },
-            //         value: '',
-            //         validation: {
-            //             required: true
-            //         }               
-            //     }
-            // },
+            gender: {
+                divClass: 'classes.divStyle2',
+                male: {
+                    label: 'Male',
+                elementConfig: {
+                    className: "classes.fillWidth",
+                    type: 'radio',
+                    name: 'gender'
+                },
+                value: '',
+                validation: {
+                    required: true
+                    }
+                },
+                female: {
+                        label: 'Female',
+                    elementConfig: {
+                        className: "classes.fillWidth",
+                        type: 'radio',
+                        name: 'gender'
+                    },
+                    value: '',
+                    validation: {
+                        required: true
+                    }               
+                }
+            },
             notes: {
                 divClass: classes.divStyle,
                 label: 'Notes',
@@ -89,11 +89,20 @@ const ProfileForm = () => {
     });
 
     const formElementsArray = [];
+    // for (let key in enteredForm.registerForm) {
+    //     formElementsArray.push({
+    //         ...enteredForm.registerForm[key],
+    //             elementConfig: { ...enteredForm.registerForm[key].elementConfig }
+    //     });
+    // }
+
     for (let key in enteredForm.registerForm) {
-        formElementsArray.push({
+        for(let key in enteredForm.registerForm[key]) {
+            formElementsArray.push({
             ...enteredForm.registerForm[key],
                 elementConfig: { ...enteredForm.registerForm[key].elementConfig }
         });
+        }
     }
   
     console.log(formElementsArray);
@@ -109,7 +118,7 @@ const ProfileForm = () => {
                                 className={formElement.elementConfig.className}
                                 type={formElement.elementConfig.type}
                                 placeholder={formElement.elementConfig.placeholder}
-                                // required={formElement.config.validation.required}
+                                 //required={formElement.config.validation.required}
                             />
                         </div>
                     ))

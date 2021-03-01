@@ -7,7 +7,8 @@ const ProfileForm = () => {
     const [enteredForm, setEnteredForm] = useState({
         registerForm: {
             fname: {
-                divClass: classes.divStyle,
+                firstName: {
+                    divClass: classes.divStyle,
                 label: 'First Name',
                 elementConfig: {
                     className: classes.fillWidth,
@@ -18,9 +19,11 @@ const ProfileForm = () => {
                 validation: {
                     required: true
                 }
+                }
             },
             lname: {
-                divClass: classes.divStyle,
+                lastName: {
+                    divClass: classes.divStyle,
                 label: 'Last Name',
                 elementConfig: {
                     className: classes.fillWidth,
@@ -31,80 +34,37 @@ const ProfileForm = () => {
                 validation: {
                     required: true
                 }
-            },
-            email: {
-                divClass: classes.divStyle,
-                label: 'Email',
-                elementConfig: {
-                    className: classes.fillWidth,
-                    type: 'email',
-                    placeholder: 'test@test.com'
-                },
-                value: '',
-                validation: {
-                    required: true
                 }
             },
-            gender: {
-                divClass: 'classes.divStyle2',
-                male: {
-                    label: 'Male',
-                elementConfig: {
-                    className: "classes.fillWidth",
-                    type: 'radio',
-                    name: 'gender'
-                },
-                value: '',
-                validation: {
-                    required: true
-                    }
-                },
-                female: {
-                        label: 'Female',
+            email: {
+                eMail: {
+                    divClass: classes.divStyle,
+                    label: 'Email',
                     elementConfig: {
-                        className: "classes.fillWidth",
-                        type: 'radio',
-                        name: 'gender'
+                        className: classes.fillWidth,
+                        type: 'email',
+                        placeholder: 'test@test.com'
                     },
                     value: '',
                     validation: {
                         required: true
-                    }               
-                }
-            },
-            notes: {
-                divClass: classes.divStyle,
-                label: 'Notes',
-                elementConfig: {
-                    className: classes.fillWidth,
-                    rows: 8,
-                    placeholder: 'Write a note'
-                },
-                value: '',
-                validation: {
-                    required: false
+                    }
                 }
             }
         }
     });
 
     const formElementsArray = [];
-    // for (let key in enteredForm.registerForm) {
-    //     formElementsArray.push({
-    //         ...enteredForm.registerForm[key],
-    //             elementConfig: { ...enteredForm.registerForm[key].elementConfig }
-    //     });
-    // }
-
     for (let key in enteredForm.registerForm) {
-        for(let key in enteredForm.registerForm[key]) {
+        for(let props in enteredForm.registerForm[key]) {
             formElementsArray.push({
-            ...enteredForm.registerForm[key],
-                elementConfig: { ...enteredForm.registerForm[key].elementConfig }
+            ...enteredForm.registerForm[key][props],
+            ...enteredForm.registerForm[key][props].validation,
+                elementConfig: { ...enteredForm.registerForm[key][props].elementConfig }
         });
         }
     }
-  
+
     console.log(formElementsArray);
   
     return (
@@ -117,39 +77,12 @@ const ProfileForm = () => {
                             <input
                                 className={formElement.elementConfig.className}
                                 type={formElement.elementConfig.type}
-                                placeholder={formElement.elementConfig.placeholder}
-                                 //required={formElement.config.validation.required}
+                                placeholder={formElement.elementConfig.placeholder} 
+                                required={formElement.validation.required}
                             />
                         </div>
                     ))
                 }
-                {/* <div className={classes.divStyle}>
-                    <label>First Name</label>
-                    <input 
-                        className={classes.fillWidth} 
-                        type="text" 
-                        placeholder="Homer" 
-                        required
-                    />
-                </div>
-                <div className={classes.divStyle}>
-                    <label>Last Name</label>
-                    <input 
-                        className={classes.fillWidth} 
-                        type="text" 
-                        placeholder="Simpson" 
-                        required
-                    />
-                </div>
-                <div className={classes.divStyle}>
-                    <label>Email</label>
-                    <input 
-                        className={classes.fillWidth} 
-                        type="email" 
-                        placeholder="test@test.com" 
-                        required
-                    />
-                </div>
                 <div className={classes.divStyle2}>
                     <label>Sex</label>
                     <input 
@@ -172,7 +105,7 @@ const ProfileForm = () => {
                         placeholder="Write a note"
                     >
                     </textarea>
-                </div> */}
+                </div> 
                 <div className={classes.inputCss}>
                     <input type="submit" value="Submit"/>
                 </div> 

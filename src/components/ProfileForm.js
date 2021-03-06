@@ -3,6 +3,21 @@ import React, { useState} from 'react';
 import classes from './ProfileForm.module.css';
 
 const ProfileForm = () => {
+    const [formData, setFormData] = useState([]);
+    
+    
+    // const obj = {
+    //     name: '',
+    //     lastName: ''
+    // }
+    // const arrData = ['Emre', 'Manis'];
+    // let key = 0;
+    // for(var prop in obj){
+    //     obj[prop] = arrData[key];
+    //     key++;
+    // };
+
+    // console.log(obj);
   
     return (
         <section> {/*form section */}

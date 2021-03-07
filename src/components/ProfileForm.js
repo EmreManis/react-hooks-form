@@ -1,23 +1,44 @@
-import React, { useState} from 'react';
+import React, { useState, useCallback } from 'react';
+import axios from 'axios';
 
 import classes from './ProfileForm.module.css';
 
 const ProfileForm = () => {
-    const [formData, setFormData] = useState([]);
-    
-    
-    // const obj = {
-    //     name: '',
-    //     lastName: ''
-    // }
-    // const arrData = ['Emre', 'Manis'];
-    // let key = 0;
-    // for(var prop in obj){
-    //     obj[prop] = arrData[key];
-    //     key++;
-    // };
+    const[firstName, setFirstName] = useState('');
+    const[lastName, setLastName] = useState('');
+    const[email, setEmail] = useState('');
+    const[gender, setGender] = useState('');
+    const[notes, setNotes] = useState('');
 
-    // console.log(obj);
+    const[formData, setFormData] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        gender: '',
+        notes: ''
+    });
+
+    const submitHandler = () => {
+        setFormData({
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            gender: gender,
+            notes: notes
+        });
+
+        const sendData = {
+            firstName: 'test',
+            lastName: 'test',
+            email: 'test@test.com',
+            gender: 'Male',
+            notes: 'notenote'
+        };
+
+            axios.post('https://formexample-cc49f-default-rtdb.firebaseio.com/form.json', sendData)
+            .then(res => console.log(res))
+            .catch(error => console.log(error));
+    }
   
     return (
         <section> {/*form section */}
@@ -29,6 +50,9 @@ const ProfileForm = () => {
                     type="text" 
                     placeholder="Homer" 
                     required
+                    onChange={event =>{
+                        setFirstName(event.target.value)
+                    }}
                 />
             </div>
             <div className={classes.divStyle}>
@@ -38,6 +62,9 @@ const ProfileForm = () => {
                     type="text" 
                     placeholder="Simpson" 
                     required
+                    onChange={event =>{
+                        setLastName(event.target.value)
+                    }}
                 />
             </div>
             <div className={classes.divStyle}>
@@ -47,6 +74,9 @@ const ProfileForm = () => {
                     type="email" 
                     placeholder="test@test.com" 
                     required
+                    onChange={event =>{
+                        setEmail(event.target.value)
+                    }}
                 />
             </div>
             <div className={classes.divStyle2}>
@@ -55,11 +85,17 @@ const ProfileForm = () => {
                     type="radio" 
                     name="gender" 
                     required
+                    onChange={event =>{
+                        setGender('Male')
+                    }}
                 />
                 <label>Male</label>
                 <input 
                     type="radio" 
                     name="gender"
+                    onChange={event =>{
+                        setGender('Female')
+                    }}
                 />
                 <label>Female</label>
             </div>
@@ -69,11 +105,14 @@ const ProfileForm = () => {
                     className={classes.fillWidth} 
                     rows="8" 
                     placeholder="Write a note"
+                    onChange={event =>{
+                        setNotes(event.target.value)
+                    }}
                 >
                 </textarea>
             </div>
             <div className={classes.inputCss}>
-                <input type="submit" value="Submit"/>
+                <input type="submit" value="Submit" onClick={submitHandler}/>
             </div>
         </form>
     </section>

@@ -4,11 +4,6 @@ import axios from 'axios';
 import classes from './ProfileForm.module.css';
 
 const ProfileForm = () => {
-    const[firstName, setFirstName] = useState('');
-    const[lastName, setLastName] = useState('');
-    const[email, setEmail] = useState('');
-    const[gender, setGender] = useState('');
-    const[notes, setNotes] = useState('');
 
     const[formData, setFormData] = useState({
         firstName: '',
@@ -18,26 +13,11 @@ const ProfileForm = () => {
         notes: ''
     });
 
-    const submitHandler = () => {
-        setFormData({
-            firstName: firstName,
-            lastName: lastName,
-            email: email,
-            gender: gender,
-            notes: notes
-        });
-
-        const sendData = {
-            firstName: 'test',
-            lastName: 'test',
-            email: 'test@test.com',
-            gender: 'Male',
-            notes: 'notenote'
-        };
-
-            axios.post('https://formexample-cc49f-default-rtdb.firebaseio.com/form.json', sendData)
+    const submitHandler = event => {
+            event.preventDefault();
+            axios.post('https://formexample-cc49f-default-rtdb.firebaseio.com/form.json', formData)
             .then(res => console.log(res))
-            .catch(error => console.log(error));
+            .catch(error => console.log(error));     
     }
   
     return (
@@ -51,7 +31,7 @@ const ProfileForm = () => {
                     placeholder="Homer" 
                     required
                     onChange={event =>{
-                        setFirstName(event.target.value)
+                        setFormData({...formData, firstName: event.target.value})
                     }}
                 />
             </div>
@@ -63,7 +43,7 @@ const ProfileForm = () => {
                     placeholder="Simpson" 
                     required
                     onChange={event =>{
-                        setLastName(event.target.value)
+                        setFormData({...formData, lastName:event.target.value})
                     }}
                 />
             </div>
@@ -75,7 +55,7 @@ const ProfileForm = () => {
                     placeholder="test@test.com" 
                     required
                     onChange={event =>{
-                        setEmail(event.target.value)
+                        setFormData({...formData, email:event.target.value})
                     }}
                 />
             </div>
@@ -86,7 +66,7 @@ const ProfileForm = () => {
                     name="gender" 
                     required
                     onChange={event =>{
-                        setGender('Male')
+                        setFormData({...formData, gender:'Male'})
                     }}
                 />
                 <label>Male</label>
@@ -94,7 +74,7 @@ const ProfileForm = () => {
                     type="radio" 
                     name="gender"
                     onChange={event =>{
-                        setGender('Female')
+                        setFormData({...formData, gender:'Female'})
                     }}
                 />
                 <label>Female</label>
@@ -106,7 +86,7 @@ const ProfileForm = () => {
                     rows="8" 
                     placeholder="Write a note"
                     onChange={event =>{
-                        setNotes(event.target.value)
+                        setFormData({...formData, notes:event.target.value})
                     }}
                 >
                 </textarea>

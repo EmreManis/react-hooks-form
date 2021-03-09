@@ -22,7 +22,7 @@ const ProfileForm = () => {
   
     return (
         <section> {/*form section */}
-        <form className={classes.formCss}>
+        <form className={classes.formCss} onSubmit={submitHandler}>
             <div className={classes.divStyle}>
                 <label>First Name</label>
                 <input 
@@ -64,10 +64,10 @@ const ProfileForm = () => {
                 <input 
                     type="radio" 
                     name="gender" 
-                    required
                     onChange={event =>{
                         setFormData({...formData, gender:'Male'})
                     }}
+                    required
                 />
                 <label>Male</label>
                 <input 
@@ -92,7 +92,7 @@ const ProfileForm = () => {
                 </textarea>
             </div>
             <div className={classes.inputCss}>
-                <input type="submit" value="Submit" onClick={submitHandler}/>
+                <input type="submit" value="Submit"/>
             </div>
         </form>
     </section>
